@@ -1,10 +1,10 @@
 # Lab 8 AREP parte 2
 
-Este documento proporciona una guía detallada sobre el uso de LLMChain en LangChain para construir cadenas de procesamiento con modelos de lenguaje (LLMs).
+Este documento proporciona una guía detallada sobre la implementación de Retrieval-Augmented Generation (RAG) utilizando LangChain y OpenAI para mejorar las respuestas de modelos de lenguaje con recuperación de documentos relevantes.
 
 Para clonar el proyecto 
 
-git clone  ´ https://github.com/lalaro/Taller8AREP.git ´
+git clone  ´ https://github.com/lalaro/TALLER8AREP-2.git ´
 
 ### Prerrequisitos
 
@@ -14,16 +14,34 @@ Se necesita instalar las siguientes herramientas antes de comenzar:
 
 2. OpenAI API Key (u otra API compatible con LangChain).
 
+3. Pinecone como base de datos vectorial.
+
 3. Instalar LangChain y dependencias necesarias con:
 
-` pip install langchain openai `
+` pip install langchain openai pinecone-client `
 
-## Uso de LLMChain
+## Arquitectura
 
-Para ejecutar la cadena y obtener una respuesta del modelo de lenguaje:
+
+
+## Uso de Retrieval-Augmented Generation (RAG)
+
+Para ejecutar la implementación de RAG y obtener respuestas mejoradas:
 
 ` 
-response = chain.run("inteligencia artificial")
+from langchain.chains import RetrievalQA
+from langchain.vectorstores import Pinecone
+from langchain.embeddings.openai import OpenAIEmbeddings
+
+# Cargar documentos y procesarlos en Pinecone
+vector_store = Pinecone.from_documents(documents, OpenAIEmbeddings())
+
+# Crear el sistema RAG
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(), retriever=vector_store.as_retriever()
+)
+
+response = qa_chain.run("¿Qué es la inteligencia artificial?")
 print(response)
  `
 
@@ -32,6 +50,7 @@ print(response)
 * [LangChain]() - Framework para construir aplicaciones con LLMs.
 * [OpenAI](https://platform.openai.com/docs/concepts) - API para modelos de lenguaje.
 * [Python](https://docs.python.org/3/) - Lenguaje de programación.
+* [Pinecone]() - Base de datos vectorial para almacenamiento y recuperación de documentos.
 
 ## Contribuyendo
 
@@ -43,7 +62,7 @@ Usamos [SemVer](http://semver.org/) para el versionado.
 
 ## Autores
 
-* **Laura Valentina Rodríguez Ortegón** - *Lab5 AREP* - [Repositorio](https://github.com/lalaro/Taller8AREP.git)
+* **Laura Valentina Rodríguez Ortegón** - *Lab8 AREP - 2* - [Repositorio](https://github.com/lalaro/TALLER8AREP-2.git)
 
 ## Licencia
 
