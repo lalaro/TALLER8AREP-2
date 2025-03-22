@@ -45,6 +45,7 @@ qa_chain = RetrievalQA.from_chain_type(
 # Consultar el modelo
 response = qa_chain.run("¿Qué es la inteligencia artificial?")
 print(response)
+```
 
 ## Construido con
 
