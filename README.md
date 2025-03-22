@@ -28,10 +28,11 @@ Se necesita instalar las siguientes herramientas antes de comenzar:
 
 Para ejecutar la implementación de RAG y obtener respuestas mejoradas:
 
-` 
+```python
 from langchain.chains import RetrievalQA
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.llms import OpenAI
 
 # Cargar documentos y procesarlos en Pinecone
 vector_store = Pinecone.from_documents(documents, OpenAIEmbeddings())
@@ -41,9 +42,9 @@ qa_chain = RetrievalQA.from_chain_type(
     llm=OpenAI(), retriever=vector_store.as_retriever()
 )
 
+# Consultar el modelo
 response = qa_chain.run("¿Qué es la inteligencia artificial?")
 print(response)
- `
 
 ## Construido con
 
