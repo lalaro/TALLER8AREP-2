@@ -1,4 +1,4 @@
-# Lab 8 AREP parte 2
+# Lab 8 AREP parte 2 / RAG
 
 Este documento proporciona una guía detallada sobre la implementación de Retrieval-Augmented Generation (RAG) utilizando LangChain y OpenAI para mejorar las respuestas de modelos de lenguaje con recuperación de documentos relevantes.
 
@@ -22,7 +22,15 @@ Se necesita instalar las siguientes herramientas antes de comenzar:
 
 ## Arquitectura
 
+![image1.jpeg](images/image1.jpeg)
 
+Esta arquitectura representa el flujo de trabajo de RAG (Retrieval-Augmented Generation), un enfoque que combina modelos de lenguaje grandes (LLM) con recuperación de información relevante desde una base de datos vectorial (Vector DB, como Pinecone) para mejorar la precisión y relevancia de las respuestas.
+
+El proceso comienza cuando el usuario envía una query (pregunta o solicitud). Esta consulta pasa por un Prompt Template, que la estructura para que el sistema pueda procesarla de manera eficiente, generando un structured text. Luego, este texto estructurado se envía a la Vector DB (Pinecone), donde se recupera información relevante relacionada con la consulta, generando un Query + Relevant Context.
+
+Esta consulta enriquecida con contexto se alimenta (feeds) al LLM, que la procesa y genera una respuesta basada en la información recuperada y en su conocimiento previo. Finalmente, la respuesta es devuelta al usuario.
+
+El valor de esta arquitectura RAG es que permite que el modelo genere respuestas más precisas y actualizadas, ya que se basa en información recuperada en tiempo real en lugar de depender únicamente de su entrenamiento previo.
 
 ## Uso de Retrieval-Augmented Generation (RAG)
 
